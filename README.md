@@ -1,27 +1,18 @@
-# AngularCounter
+# angular-counter
+I've created the project with Angular CLI so you start the app using ``ng serve --open``\
+I've implemented 4 components:
+- app (displays the counter)
+- up (increase button)
+- down (decrease button)
+- reset (reset form according to select birthdate)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+And 1 service:
+- counter
 
-## Development server
+The service is injected in every component allowing them to work on the same data.\
+The counter is an observable so that the app component is easy to update.\
+The counter is persisted in session storage.\
+I didn't persist the step value (X) as it was not required (though it could make sense): If you reload the app, it will be reset to 1.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

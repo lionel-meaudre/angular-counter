@@ -1,0 +1,13 @@
+.container{
+    max-width: 500px;
+    padding: 10px;
+}
+
+.container div{
+    margin: 10px 0 10px 0;
+}
+
+.container .card-body{
+    font-size: x-large;
+    text-align: right;
+}
