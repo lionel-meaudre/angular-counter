@@ -10,7 +10,7 @@ export class CounterService {
   private nbActions : number = 0;
 
   private get counterValue():number {
-    
+
     const value = sessionStorage.getItem('counterValue');
 
     if(value == null)
@@ -21,17 +21,17 @@ export class CounterService {
 
   private counterSource = new BehaviorSubject(this.counterValue);
 
-  counter = this.counterSource.asObservable(); //counter needs to be observable to update main component
+  counter = this.counterSource.asObservable();
 
   private set counterValue(value: number) {
     this.counterSource.next(value);
-    sessionStorage.setItem('counterValue', value.toString()); //need to persist this value
+    sessionStorage.setItem('counterValue', value.toString());
   }
 
   private updateAction(){
     this.nbActions++;
-    //double the step every 30 actions
-    if(this.nbActions % 30 ==0 ){
+
+    if(this.nbActions % 30 == 0 ){
       this.stepValue *= 2;
     }
   }
@@ -47,7 +47,7 @@ export class CounterService {
     this.counterValue -= this.stepValue;
     return this.counterValue;
   }
-  
+
   resetCurrentValue(){
     this.counterValue = 0;
   }

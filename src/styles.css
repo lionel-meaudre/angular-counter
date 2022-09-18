@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+.container{
+    max-width: 300px;
+    padding: 10px;
+}
 
+.container div{
+    margin: 10px 0 10px 0;
+}
+
+.container .card-body{
+    font-size: x-large;
+    text-align: right;
+}

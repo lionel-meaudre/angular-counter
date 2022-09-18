@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CounterService } from '../counter.service';
+import { FormControl, FormBuilder, FormGroup, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-reset',
@@ -8,18 +10,32 @@ import { CounterService } from '../counter.service';
 })
 export class ResetComponent implements OnInit {
 
-  constructor(private counterService: CounterService) { }
+  success : boolean = false;
+  message : string = '';
 
-  birthdate: Date = new Date();
-  message: string = '';
-  success: boolean = false;
+  birthdateCtrl : FormControl;
+  resetForm : FormGroup;
 
-  ngOnInit(): void {
+  constructor(private counterService: CounterService, private formBuilder: FormBuilder) {
+    this.birthdateCtrl = new FormControl(
+      formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+      Validators.compose([Validators.required, ResetComponent.isOldEnough])
+    );
+
+    this.resetForm = this.formBuilder.group(
+      { birthdate: this.birthdateCtrl }
+    );
+
+    this.resetForm.valueChanges.subscribe(() => {
+      this.message = '';
+    })
   }
 
+  ngOnInit(): void {}
+
   reset(): void{
-    const age = this.computeAge(this.birthdate);
-    if(age >= 18){
+
+    if(this.resetForm.valid) {
       this.counterService.resetCurrentValue();
       this.success = true;
       this.message = "Counter has been reset!";
@@ -30,16 +46,15 @@ export class ResetComponent implements OnInit {
     }
   }
 
-  dateChanged(event: any){
-    if(event.target != null)
-    {
-      this.birthdate = event.target.valueAsDate;
-    }
-  }
-
-  private computeAge(birthday: Date) : number {
+  private static computeAge(birthday: Date) : number { // birthday is a date
     var ageDifMs = Date.now() - Number(birthday);
     var ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
+
+  private static isOldEnough (control: AbstractControl): ValidationErrors | null {
+    // control is a date input, so we can build the Date from the value
+    const age = ResetComponent.computeAge(new Date(control.value));
+    return age >= 18 ? null : { tooYoung: true };
+  };
 }

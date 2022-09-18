@@ -1,12 +1,10 @@
-<div class="form-group">
+<form [formGroup]="resetForm" (ngSubmit)="reset()" class="form-group">
     <label for="birthdate">Birthdate:</label>
-    <input id="birthdate" class="form-control" type="date" [valueAsDate]="birthdate" (change)="dateChanged($event)" />
-</div>
-<div>
-    <button type="button" class="btn btn-primary" (click)="reset()">Reset</button>
-</div>
+    <input id="birthdate" class="form-control" type="date" formControlName="birthdate"/>
+    <button type="submit" class="btn btn-primary">Reset</button>
+</form>
 <div *ngIf="message" class="alert " [ngClass]="{'alert-primary': success, 'alert-danger' : !success }" role="alert">
-    {{message}}
+  {{message}}
 </div>
 
 

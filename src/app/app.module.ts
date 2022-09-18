@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { UpComponent } from './up/up.component';
 import { DownComponent } from './down/down.component';
 import { ResetComponent } from './reset/reset.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,9 @@ import { ResetComponent } from './reset/reset.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

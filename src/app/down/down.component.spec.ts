@@ -22,4 +22,23 @@ describe('DownComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a button with right text', () => {
+    const element = fixture.nativeElement;
+    const button = element.querySelector('button');
+    expect(button.innerHTML).toBe('Decrease value from 1');
+  });
+
+  it('should call decrease on click', () => {
+
+    spyOn(component, 'decrease');
+
+    const element = fixture.nativeElement;
+    const button = element.querySelector('button');
+    button.dispatchEvent(new Event('click'));
+
+    fixture.detectChanges();
+
+    expect(component.decrease).toHaveBeenCalledTimes(1);
+  });
 });
